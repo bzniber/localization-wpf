@@ -26,11 +26,8 @@ namespace TPLocalization
             dt.Columns.Add("id");
             dt.Columns.Add("en");
             dt.Columns.Add("fr");
-            dt.Columns.Add("comment");
+            dt.Columns.Add("es");
 
-            string[] texts = { "play", "play", "jouer", "bouton jouer" };
-            //ajout de lignes
-            dt.Rows.Add(texts);
             dt.TableName = "DataTable";
             datagrid.ItemsSource = dt.DefaultView;
         }
@@ -57,6 +54,32 @@ namespace TPLocalization
         private void OnExportClickedPlusPlus(object sender, RoutedEventArgs e)
         {
             ExportCpp();
+        }
+
+
+        private void OnImportClickedJSON(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnImportClickedCSV(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnImportClickedXML(object sender, RoutedEventArgs e)
+        {
+            ImportXML();
+        }
+
+        private void OnAddColumnClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnAddRowClicked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
