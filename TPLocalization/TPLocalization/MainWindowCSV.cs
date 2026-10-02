@@ -15,7 +15,7 @@ namespace TPLocalization
             string[] e = _st.Split(",");
         }
 
-        public void ExportCSV(DataTable dt)
+        public void ExportCSV()
         {
             StringBuilder sb = new StringBuilder();
 
