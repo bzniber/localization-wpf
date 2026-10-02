@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,18 @@ namespace TPLocalization
         private const string ConfigExtension = ".json";
         private const string SchemaExtension = ".schema.json";
 
-        public void ImportJSON(string _fileName)
+        public void ImportJSON()
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            string content = "";
 
-            string content = File.ReadAllText(_fileName, Encoding.UTF8);
+            if (ofd.ShowDialog() == true)
+            {
+                foreach (string file in ofd.FileNames)
+                {
+                    content = File.ReadAllText(file, Encoding.UTF8);
+                }
+            }
 
             DataTable importedData = JsonConvert.DeserializeObject<DataTable>(content);
 
