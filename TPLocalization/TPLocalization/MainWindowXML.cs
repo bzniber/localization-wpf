@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -11,12 +12,16 @@ namespace TPLocalization
     {
         public void ImportXML()
         {
-            dt.ReadXml("DataTable.xml");
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.ShowDialog();
+            dt.ReadXml(ofd.FileName);
         }
 
         public void ExportXML()
         {
-            dt.WriteXml("DataTable.xml");
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.ShowDialog();
+            dt.WriteXml(sfd.FileName);
         }
     }
 }

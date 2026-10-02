@@ -11,13 +11,22 @@
             <MenuItem x:Name ="FileButton" Header="File">
                 <MenuItem x:Name ="OpenButton" Header="Open"/>
                 <MenuItem x:Name ="SaveAsButton" Header="Save as"/>
-                <MenuItem x:Name ="ExportButton" Header="Export">
-                    <MenuItem x:Name ="JSONButton" Header="JSON" Click="OnExportClickedJSON"/>
-                    <MenuItem x:Name ="CSVButton" Header="CSV" Click="OnExportClickedCSV"/>
-                    <MenuItem x:Name ="XMLButton" Header="XML" Click="OnExportClickedXML"/>
-                    <MenuItem x:Name ="CSharpButton" Header="CSHARP" Click="OnExportClickedCSharp"/>
-                    <MenuItem x:Name ="CPlusPlusButton" Header="CPLUSPLUS" Click="OnExportClickedPlusPlus"/>
+                <MenuItem x:Name ="ImportButton" Header="Import">
+                    <MenuItem x:Name ="JSONImportButton" Header="JSON" Click="OnImportClickedJSON"/>
+                    <MenuItem x:Name ="CSVImportButton" Header="CSV" Click="OnImportClickedCSV"/>
+                    <MenuItem x:Name ="XMLImportButton" Header="XML" Click="OnImportClickedXML"/>
                 </MenuItem>
+                <MenuItem x:Name ="ExportButton" Header="Export">
+                    <MenuItem x:Name ="JSONExportButton" Header="JSON" Click="OnExportClickedJSON"/>
+                    <MenuItem x:Name ="CSVExportButton" Header="CSV" Click="OnExportClickedCSV"/>
+                    <MenuItem x:Name ="XMLExportButton" Header="XML" Click="OnExportClickedXML"/>
+                    <MenuItem x:Name ="CSharpExportButton" Header="CSHARP" Click="OnExportClickedCSharp"/>
+                    <MenuItem x:Name ="CPlusPlusExportButton" Header="CPLUSPLUS" Click="OnExportClickedPlusPlus"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name ="EditButton" Header="Edit">
+                <MenuItem x:Name ="AddColumnButton" Header="Add Column" Click="OnAddColumnClicked"/>
+                <MenuItem x:Name ="AddRowButton" Header="Add Row" Click="OnAddRowClicked"/>
             </MenuItem>
         </Menu>
         <DataGrid x:Name ="datagrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,24,0,0"/>
