@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Menu Height="24" VerticalAlignment="Top">
+            <MenuItem x:Name ="FileButton" Header="File">
+                <MenuItem x:Name ="OpenButton" Header="Open"/>
+                <MenuItem x:Name ="SaveAsButton" Header="Save as"/>
+                <MenuItem x:Name ="ExportButton" Header="Export"/>
+            </MenuItem>
+        </Menu>
+        <DataGrid x:Name ="datagrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,24,0,0"/>
 
     </Grid>
 </Window>
