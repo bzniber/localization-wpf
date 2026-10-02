@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TPLocalization")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f55a7d0a3b40a5c5ebcbec8c53fa5223ea5b7343")]
 [assembly: System.Reflection.AssemblyProductAttribute("TPLocalization")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TPLocalization")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
