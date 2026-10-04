@@ -14,14 +14,22 @@ namespace TPLocalization
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.ShowDialog();
-            dt.ReadXml(ofd.FileName);
+            if (ofd != null && ofd.FileName.Length > 1)
+            {
+                dt.ReadXml(ofd.FileName);
+            }
         }
 
         public void ExportXML()
         {
             SaveFileDialog sfd = new SaveFileDialog();
+            sfd.DefaultExt = ".xml";
+            sfd.Filter = "Fichiers XML (*.xml)|*.xml";
             sfd.ShowDialog();
-            dt.WriteXml(sfd.FileName);
+            if (sfd != null && sfd.FileName.Length > 1)
+            {
+                dt.WriteXml(sfd.FileName);
+            }
         }
     }
 }

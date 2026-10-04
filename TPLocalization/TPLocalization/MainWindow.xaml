@@ -27,6 +27,8 @@
             <MenuItem x:Name ="EditButton" Header="Edit">
                 <MenuItem x:Name ="AddColumnButton" Header="Add Column" Click="OnAddColumnClicked"/>
                 <MenuItem x:Name ="AddRowButton" Header="Add Row" Click="OnAddRowClicked"/>
+                <MenuItem x:Name ="RemoveColumnButton" Header="Remove Column" Click="OnRemoveColumnClicked"/>
+                <MenuItem x:Name ="RemoveRowButton" Header="Remove Row" Click="OnRemoveRowClicked"/>
             </MenuItem>
         </Menu>
         <DataGrid x:Name ="datagrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,24,0,0"/>
