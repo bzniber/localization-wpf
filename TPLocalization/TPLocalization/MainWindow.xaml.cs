@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Microsoft.VisualBasic;
+using System.Data;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,6 +30,12 @@ namespace TPLocalization
             dt.Columns.Add("es");
 
             dt.TableName = "DataTable";
+            datagrid.ItemsSource = dt.DefaultView;
+        }
+
+        void UpdateDataGrid()
+        {
+            datagrid.ItemsSource = null;
             datagrid.ItemsSource = dt.DefaultView;
         }
 
@@ -74,12 +81,19 @@ namespace TPLocalization
 
         private void OnAddColumnClicked(object sender, RoutedEventArgs e)
         {
+            string userInput = Interaction.InputBox("Enter column name:", "Input Required", "");
 
+            if (!string.IsNullOrEmpty(userInput))
+            {
+                dt.Columns.Add(userInput);
+                UpdateDataGrid();
+            }
         }
 
         private void OnAddRowClicked(object sender, RoutedEventArgs e)
         {
-
+            dt.Rows.Add();
+            UpdateDataGrid();
         }
     }
 }
