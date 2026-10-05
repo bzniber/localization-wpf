@@ -14,34 +14,60 @@ namespace TPLocalization
     public partial class MainWindow
     {
         private const string ConfigExtension = ".json";
-        private const string SchemaExtension = ".schema.json";
+        private const string ConfigFilterExtension = "Fichiers JSON (*.json)|*.json";
 
         public void ImportJSON()
         {
             OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.DefaultExt = ConfigExtension;
+
             string content = "";
 
             if (ofd.ShowDialog() == true)
             {
-                foreach (string file in ofd.FileNames)
+                if (ofd.FileName.Length > 1)
                 {
-                    content = File.ReadAllText(file, Encoding.UTF8);
+                    foreach (string file in ofd.FileNames)
+                    {
+                        content = File.ReadAllText(file, Encoding.UTF8);
+                    }
                 }
             }
 
-            DataTable importedData = JsonConvert.DeserializeObject<DataTable>(content);
-
-            dt = importedData;
-
-            datagrid.ItemsSource = dt.DefaultView;
+            if (content != null)
+            {
+                DataTable importedData = JsonConvert.DeserializeObject<DataTable>(content);
+                dt = importedData;
+                MessageBox.Show("JSON Import done. :D");
+            }
+            else
+            {
+                MessageBox.Show("JSON Import failed. :-(");
+            }
+            UpdateDataGrid();
         }
         public void ExportJSON()
         {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.DefaultExt = ConfigExtension;
+            sfd.Filter = ConfigFilterExtension;
+
+            sfd.ShowDialog();
+                MessageBox.Show($"Rows : {dt.Rows.Count}");
 
             string jsonString = JsonConvert.SerializeObject(dt);
-            File.WriteAllText("TPLocalization" + ConfigExtension, jsonString);
+            if (sfd != null && sfd.FileName.Length > 1)
+            {
 
-            MessageBox.Show("Export done.");
+                File.WriteAllText(sfd.FileName, jsonString);
+                MessageBox.Show("Export done.");
+            }
+            else
+            {
+                MessageBox.Show("Export failed. (I'm fcking bad :( )");
+            }
+
         }
     }
 }
