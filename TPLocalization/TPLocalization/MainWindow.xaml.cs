@@ -71,7 +71,7 @@ namespace TPLocalization
 
         private void OnImportClickedCSV(object sender, RoutedEventArgs e)
         {
-
+            InportCSV();
         }
 
         private void OnImportClickedXML(object sender, RoutedEventArgs e)
