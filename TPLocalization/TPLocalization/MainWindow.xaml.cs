@@ -66,7 +66,7 @@ namespace TPLocalization
 
         private void OnImportClickedJSON(object sender, RoutedEventArgs e)
         {
-
+            ImportJSON();
         }
 
         private void OnImportClickedCSV(object sender, RoutedEventArgs e)
