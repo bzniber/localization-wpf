@@ -31,7 +31,6 @@ namespace TPLocalization
 
             dt.TableName = "DataTable";
             datagrid.ItemsSource = dt.DefaultView;
-
         }
 
         void UpdateDataGrid()
@@ -112,7 +111,7 @@ namespace TPLocalization
             int count = dt.Rows.Count;
             if (count > 0)
             {
-                dt.Rows.RemoveAt(count - 1);
+                dt.Rows.RemoveAt(count-1);
                 UpdateDataGrid();
             }
         }
