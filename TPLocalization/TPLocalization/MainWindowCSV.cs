@@ -42,6 +42,7 @@ namespace TPLocalization
                     }
                 }
             }
+            UpdateDataGrid();
         }
 
         public void ExportCSV()
