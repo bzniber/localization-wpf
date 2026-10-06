@@ -9,8 +9,6 @@
     <Grid>
         <Menu Height="24" VerticalAlignment="Top">
             <MenuItem x:Name ="FileButton" Header="File">
-                <MenuItem x:Name ="OpenButton" Header="Open"/>
-                <MenuItem x:Name ="SaveAsButton" Header="Save as"/>
                 <MenuItem x:Name ="ImportButton" Header="Import">
                     <MenuItem x:Name ="JSONImportButton" Header="JSON" Click="OnImportClickedJSON"/>
                     <MenuItem x:Name ="CSVImportButton" Header="CSV" Click="OnImportClickedCSV"/>
