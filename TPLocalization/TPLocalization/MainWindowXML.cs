@@ -19,6 +19,8 @@ namespace TPLocalization
             dt.Columns.Clear();
 
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = ".xml";
+            ofd.Filter = "Fichiers XML (*.xml)|*.xml";
             if (ofd.ShowDialog() == true && !string.IsNullOrEmpty(ofd.FileName))
             {
                 string fileText = File.ReadAllText(ofd.FileName);
@@ -27,7 +29,7 @@ namespace TPLocalization
 
                 foreach (var datatable in datatables)
                 {
-                    foreach (XElement child in datatable.Elements()) 
+                    foreach (XElement child in datatable.Elements())
                     {
                         string name = child.Name.ToString();
                         if (!dt.Columns.Contains(name))
