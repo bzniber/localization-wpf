@@ -181,8 +181,7 @@ namespace TPLocalization
                 }
             };
 
-            ExportToClass(cppDefC);
-            ExportToClass(cppDefH);
+            ExportToClass(cppDefC, cppDefH);
         }
         public void ExportCSharp()
         {
@@ -200,73 +199,83 @@ namespace TPLocalization
             ExportToClass(cppDef);
         }
 
-        void ExportToClass(ClassDefinition _def)
+        void ExportToClass(params ClassDefinition[] _defParam)
         {
-            // locate source file
-            string sourcePath = AppDomain.CurrentDomain.BaseDirectory + "ClassTemplates\\" + _def.sourceName;
-            if (!File.Exists(sourcePath))
-            {
-                MessageBox.Show($"Error: Template File not found\n({sourcePath})");
-                return;
-            }
-
             // ask for output path
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = $"{_def.typeName} |*{_def.extention}";
+            SaveFileDialog saveFileDialog = new()
+            {
+                Filter = $"{_defParam[0].typeName} |*{_defParam[0].extention}"
+            };
             if (saveFileDialog.ShowDialog() != true)
                 return;
 
-            // if valid, proceed
-            StreamReader Class_Template = new(sourcePath);
-            string pathName = saveFileDialog.FileName;
-            StreamWriter Class_File = new(pathName);
 
-
-            // generate list of supported languages
-            List<string> supportedLoc = [];
-            var columns = datagrid.Columns;
-            foreach (var column in columns)
+            foreach (var def in _defParam)
             {
-                string? header = column.Header.ToString()?.ToLower();
-                if (header == null || header == "comment")
-                    continue;
-
-                if (header == "id")
-                    continue;
-
-                supportedLoc.Add(header);
-            }
-
-            string funcName = GetFileNameFromPath(pathName);
-            FileDefinition fileDef = new(funcName, supportedLoc, datagrid);
-
-            string? line = Class_Template.ReadLine();
-            while (line != null)
-            {
-                foreach (var key in globalKeys.Keys)
+                // locate sources files
+                string sourcePath = AppDomain.CurrentDomain.BaseDirectory + "ClassTemplates\\" + def.sourceName;
+                if (!File.Exists(sourcePath))
                 {
-                    if (line.Contains(key))
-                    {
-                        line = line.Replace(key, globalKeys[key](fileDef));
-                    }
+                    MessageBox.Show($"Error: Template File not found\n({sourcePath})");
+                    return;
                 }
 
-                foreach (var key in _def.stringKeys.Keys)
+
+                // if valid, proceed
+                StreamReader Class_Template = new(sourcePath);
+                string pathName = saveFileDialog.FileName;
+                int fileExtPos = pathName.LastIndexOf('.');
+                if (fileExtPos >= 0)
+                    pathName = pathName[..fileExtPos] + def.extention;
+                StreamWriter Class_File = new(pathName);
+
+
+                // generate list of supported languages
+                List<string> supportedLoc = [];
+                var columns = datagrid.Columns;
+                foreach (var column in columns)
                 {
-                    if (line.Contains(key))
-                    {
-                        line = line.Replace(key, _def.stringKeys[key](fileDef));
-                    }
+                    string? header = column.Header.ToString()?.ToLower();
+                    if (header == null || header == "comment")
+                        continue;
+
+                    if (header == "id")
+                        continue;
+
+                    supportedLoc.Add(header);
                 }
 
-                Class_File.WriteLine(line);
-                line = Class_Template.ReadLine();
+                string funcName = GetFileNameFromPath(pathName);
+                FileDefinition fileDef = new(funcName, supportedLoc, datagrid);
+
+                string? line = Class_Template.ReadLine();
+                while (line != null)
+                {
+                    foreach (var key in globalKeys.Keys)
+                    {
+                        if (line.Contains(key))
+                        {
+                            line = line.Replace(key, globalKeys[key](fileDef));
+                        }
+                    }
+
+                    foreach (var key in def.stringKeys.Keys)
+                    {
+                        if (line.Contains(key))
+                        {
+                            line = line.Replace(key, def.stringKeys[key](fileDef));
+                        }
+                    }
+
+                    Class_File.WriteLine(line);
+                    line = Class_Template.ReadLine();
+                }
+
+                Class_File.Close();
+                Class_Template.Close();
+
+                MessageBox.Show($"Exported {fileDef.functionName}{def.extention}\n{pathName}");
             }
-
-            Class_File.Close();
-            Class_Template.Close();
-
-            MessageBox.Show("Done");
         }
 
         static string GetFileNameFromPath(string _path)
