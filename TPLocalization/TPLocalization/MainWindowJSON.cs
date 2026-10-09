@@ -15,16 +15,18 @@ namespace TPLocalization
     {
         private const string ConfigExtension = ".json";
         private const string ConfigFilterExtension = "Fichiers JSON (*.json)|*.json";
+        private const string ConfigSchemaExtension = ".schema";
 
         public void ImportJSON()
         {
             OpenFileDialog ofd = new OpenFileDialog();
 
             ofd.DefaultExt = ConfigExtension;
+            ofd.Filter = ConfigFilterExtension;
 
             string content = "";
 
-            if (ofd.ShowDialog() == true)
+            if (ofd.ShowDialog() == true && !string.IsNullOrEmpty(ofd.FileName))
             {
                 if (ofd.FileName.Length > 1)
                 {
@@ -35,39 +37,44 @@ namespace TPLocalization
                 }
             }
 
-            if (content != null)
+            if (!string.IsNullOrEmpty(ofd.FileName))
             {
                 DataTable importedData = JsonConvert.DeserializeObject<DataTable>(content);
                 dt = importedData;
-                MessageBox.Show("JSON Import done. :D");
             }
             else
             {
                 MessageBox.Show("JSON Import failed. :-(");
+                return;
             }
             UpdateDataGrid();
+
+            MessageBox.Show("JSON Import done. :D");
         }
         public void ExportJSON()
         {
+            //Dictionary<string, string> 
+
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.DefaultExt = ConfigExtension;
             sfd.Filter = ConfigFilterExtension;
 
             sfd.ShowDialog();
-                MessageBox.Show($"Rows : {dt.Rows.Count}");
+            //MessageBox.Show($"Rows : {dt.Rows.Count}");
 
             string jsonString = JsonConvert.SerializeObject(dt);
             if (sfd != null && sfd.FileName.Length > 1)
             {
+                string schemaPath = ConfigSchemaExtension + jsonString;
 
                 File.WriteAllText(sfd.FileName, jsonString);
-                MessageBox.Show("Export done.");
             }
             else
             {
-                MessageBox.Show("Export failed. (I'm fcking bad :( )");
+                MessageBox.Show("Export failed.");
+                return;
             }
-
+            MessageBox.Show("Export done.");
         }
     }
 }
