@@ -1,0 +1,54 @@
+#include "%FuncName%.h"
+#include <string>
+#include <map>
+#include <algorithm>
+
+%FuncName%::%FuncName%()
+{
+	if (supportedCulture.size() <= 0)
+	{
+		std::cout << "Error: No Supported Culture Defined";
+		return;
+	}
+
+	std::cout << "Localisation Loaded" << std::endl;
+	LoadCulture(*(supportedCulture.begin()));
+}
+
+bool %FuncName%::LoadCulture(const std::string& _cultureName)
+{
+	std::string cultureName = _cultureName;
+	std::transform(cultureName.begin(), cultureName.end(), cultureName.begin(), std::tolower);
+
+	if (currentLoc == cultureName)
+	{
+		std::cout << "Culture already loaded" << std::endl;
+		return true;
+	}
+
+	if (not supportedCulture.contains(cultureName))
+	{
+		std::cout << "Culture \"" << cultureName << "\" is not supported" << std::endl;
+		return false;
+	}
+
+	currentLoc = cultureName;
+	if (not cultureInitializers.contains(currentLoc))
+	{
+		std::cout << "Not Initializer Function Found" << std::endl;
+		return false;
+	}
+
+	cultureInitializers.at(currentLoc)(localisations);
+	return true;
+}
+
+std::string %FuncName%::GetLocalisation(std::string _key)
+{
+	if (localisations.contains(_key))
+		return localisations.at(_key);
+
+	return "Invalid Loc";
+}
+
+%MainLoaders%

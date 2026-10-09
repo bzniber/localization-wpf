@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SVN\\Git\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj": {}
+    "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj": {}
   },
   "projects": {
-    "D:\\SVN\\Git\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj": {
+    "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SVN\\Git\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
+        "projectUniqueName": "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
         "projectName": "TPLocalization",
-        "projectPath": "D:\\SVN\\Git\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
+        "projectPath": "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
         "packagesPath": "C:\\Users\\Etudiant1\\.nuget\\packages\\",
-        "outputPath": "D:\\SVN\\Git\\localization-wpf\\TPLocalization\\TPLocalization\\obj\\",
+        "outputPath": "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -55,6 +55,14 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.4, )"
+            },
+            "System.Xml.XDocument": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Xml.XmlSerializer": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [

@@ -1,10 +1,37 @@
 {
   "version": 2,
-  "dgSpecHash": "pUl8SHnmgok=",
+  "dgSpecHash": "D9exr2Nss3Q=",
   "success": true,
-  "projectFilePath": "D:\\SVN\\Git\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
+  "projectFilePath": "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Etudiant1\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+    "C:\\Users\\Etudiant1\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
+    "C:\\Users\\Etudiant1\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\Etudiant1\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1510",
+      "level": "Warning",
+      "message": "PackageReference System.Xml.XmlSerializer will not be pruned. This package is automatically available and does not need to be referenced explicitly. Remove the PackageReference item.",
+      "projectPath": "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
+      "libraryId": "System.Xml.XmlSerializer",
+      "targetGraphs": [
+        "net10.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1510",
+      "level": "Warning",
+      "message": "PackageReference System.Xml.XDocument will not be pruned. This package is automatically available and does not need to be referenced explicitly. Remove the PackageReference item.",
+      "projectPath": "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\SVN\\Eleves\\tllahi\\Tools\\Localisation\\TP_Groupe\\localization-wpf\\TPLocalization\\TPLocalization\\TPLocalization.csproj",
+      "libraryId": "System.Xml.XDocument",
+      "targetGraphs": [
+        "net10.0-windows7.0"
+      ]
+    }
+  ]
 }
