@@ -108,16 +108,81 @@ namespace TPLocalization
 
             return dicts;
         }
+
+        static string CppHeaderLoader(FileDefinition _def)
+        {
+            string output = string.Empty;
+            foreach (string loc in _def.supportedLoc)
+            {
+                output += $"\n\t\tstatic void LoadCulture_{loc}(LocMap&);";
+            }
+
+            return output;
+        }
+
+        static string CppMainLodaers(FileDefinition _def)
+        {
+            string output = string.Empty;
+            foreach (string loc in _def.supportedLoc)
+            {
+                output += $"void {_def.functionName}::LoadCulture_{loc}(LocMap& _map)";
+                output += "\n\t{\n\t\t_map.clear();\n\t\t_map = {";
+
+                foreach (DataRowView row in _def.datagrid.ItemsSource)
+                {
+
+                    string key = string.Empty;
+                    string value = string.Empty;
+
+                    for (int colID = 0; colID < _def.datagrid.Columns.Count; colID++)
+                    {
+                        string? localHeader = _def.datagrid.Columns[colID].Header.ToString()?.ToLower();
+
+                        string? rowValue = row[colID].ToString()?.ToLower();
+                        if (rowValue == null)
+                            continue;
+
+                        if (localHeader == "id")
+                            key = rowValue;
+                        if (localHeader == loc)
+                            value = rowValue;
+                    }
+
+                    if (key != string.Empty && value != string.Empty)
+                        output += "\n\t\t\t{\"" + key + "\", \"" + value + "\"},";
+                }
+
+                output += "\n\t\t};\n}\n";
+            }
+            return output;
+        }
         /////////////////////////////////////////////////////////////
 
         public void ExportCpp()
         {
-            ClassDefinition cppDef = new()
+            ClassDefinition cppDefC = new()
             {
-                extention = "b"
+                typeName = "Cpp Class",
+                extention = ".cpp",
+                sourceName = "TemplateCpp_Cpp.txt",
+                stringKeys = new()
+                {
+                    {"%MainLoaders%", CppMainLodaers }
+                }
+            };
+            ClassDefinition cppDefH = new()
+            {
+                typeName = "Cpp Header",
+                extention = ".h",
+                sourceName = "TemplateCpp_H.txt",
+                stringKeys = new()
+                {
+                    {"%HeaderLoaders%", CppHeaderLoader }
+                }
             };
 
-            ExportToClass(cppDef);
+            ExportToClass(cppDefC);
+            ExportToClass(cppDefH);
         }
         public void ExportCSharp()
         {
@@ -138,7 +203,7 @@ namespace TPLocalization
         void ExportToClass(ClassDefinition _def)
         {
             // locate source file
-            string sourcePath = AppDomain.CurrentDomain.BaseDirectory + "/ClassTemplates/" + _def.sourceName;
+            string sourcePath = AppDomain.CurrentDomain.BaseDirectory + "ClassTemplates\\" + _def.sourceName;
             if (!File.Exists(sourcePath))
             {
                 MessageBox.Show($"Error: Template File not found\n({sourcePath})");

@@ -1,0 +1,43 @@
+﻿// class generated for NET10 or above
+
+public static class %FuncName%
+{
+    static string currentLoc;
+    static readonly HashSet<string> supportedCulture = [%LocArray%];
+
+    static %FuncName%()
+    {
+        currentLoc = supportedCulture.First();
+        LoadCulture(currentLoc);
+    }
+
+
+    static Dictionary<string, string> localisations = new();
+    public static string GetLocalisation(string _key)
+    {
+        if (localisations.TryGetValue(_key, out string? loc))
+            return loc;
+        return "Invalid Loc";
+    }
+
+    static readonly Dictionary<string, Action> cultureInitializers = new()
+    {
+        %DictCultInit%
+    };
+
+    public static bool LoadCulture(string _cultureName)
+    {
+        string cultureName = _cultureName.ToLower();
+        if (!supportedCulture.Contains(cultureName))
+            return false;
+
+        currentLoc = cultureName;
+        if (!cultureInitializers.TryGetValue(currentLoc, out var func))
+            return false;
+
+        func();
+        return true;
+    }
+
+    %InitDictionaries%
+}
