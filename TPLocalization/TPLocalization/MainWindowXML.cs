@@ -65,6 +65,7 @@ namespace TPLocalization
             sfd.Filter = "Fichiers XML (*.xml)|*.xml";
             if (sfd.ShowDialog() == true && !string.IsNullOrEmpty(sfd.FileName))
             {
+                dt.TableName = "DataTable";
                 dt.WriteXml(sfd.FileName);
                 MessageBox.Show("XML File exported!");
             }
